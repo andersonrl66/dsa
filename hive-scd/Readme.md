@@ -1,4 +1,20 @@
-Será feito o tratamento de Slow Changing Dimensions (SCD) para a tabela customer do banco de dados adventureworks.
+# HIVE SCD
 
-Passo 1
-Criação de tabelas no H
+Será feito o tratamento de Slow Changing Dimensions (SCD) para a tabela customer do banco de dados adventureworks. Serão criadas duas tabelas no Hive, customer_update_stage, que será carregada com dados vindos do mysql por intervalo de data usando sqoop, e customer que terá os atributos validFrom e validTo para tratar a alteração de valores. A partir de customer_update_stage é feito o merge na tabela customer utilizando a estratégia tipo 2 de SCD.
+
+1. Criação de tabelas no Hive:
+    - customer_update_stage
+    
+      create table customer_update_stage
+      (customerID int, territoryID int, accountNumber varchar(10), customerType  varchar(1),  rowguid varchar(16), modifiedDate timestamp)
+      clustered by (customerID) into 2 buckets stored as orc
+      tblproperties("transactional"="true");
+   
+    - customer
+
+      create table customer
+      (customerID int, territoryID int, accountNumber varchar(10), customerType  varchar(1),  rowguid varchar(16), modifiedDate timestamp, validFrom timestamp, validTo timestamp)
+      clustered by (customerID) into 2 buckets stored as orc
+      tblproperties("transactional"="true");
+
+2. Script de carga do sqoop
