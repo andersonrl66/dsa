@@ -5,7 +5,7 @@ Será feito o tratamento de Slow Changing Dimensions (SCD) para a tabela custome
 1. Criação de tabelas no Hive:
     - customer_update_stage
     
-      create table customer_update_stage
+      create external table customer_update_stage
       (customerID int, territoryID int, accountNumber varchar(10), customerType  varchar(1),  rowguid varchar(16), modifiedDate timestamp)
       clustered by (customerID) into 2 buckets stored as orc
       tblproperties("transactional"="true");
@@ -18,3 +18,10 @@ Será feito o tratamento de Slow Changing Dimensions (SCD) para a tabela custome
       tblproperties("transactional"="true");
 
 2. Script de carga do sqoop
+
+    - Listagem de databases
+        sqoop list-databases --connect jdbc:mysql://localhost:3306/?serverTimezone=UTC --username root -P
+    
+    - Importação de dados do mysql para o hive
+        sqoop import --connect jdbc:mysql://localhost:3306/?serverTimezone=UTC --username root -P \
+        ‐hive‐import ‐‐hive‐table customer_update_stage ‐‐hive‐overwrite ‐‐delete‐target‐dir ‐‐m 1
