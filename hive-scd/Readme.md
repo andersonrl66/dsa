@@ -20,8 +20,14 @@ Será feito o tratamento de Slow Changing Dimensions (SCD) para a tabela custome
 2. Script de carga do sqoop
 
     - Listagem de databases
-        sqoop list-databases --connect jdbc:mysql://localhost:3306/?serverTimezone=UTC --username root -P
+        sqoop list-databases --connect jdbc:mysql://hdpmaster:3306/?serverTimezone=UTC --username root -P
     
     - Importação de dados do mysql para o hive
-        sqoop import --connect jdbc:mysql://localhost:3306/?serverTimezone=UTC --username root -P \
-        ‐hive‐import ‐‐hive‐table customer_update_stage ‐‐hive‐overwrite ‐‐delete‐target‐dir ‐‐m 1
+        sqoop import --connect jdbc:mysql://hdpmaster:3306/adventureworks?serverTimezone=UTC --username root -P \
+        --table 'customer' \
+        --where 'modifiedDate > STR_TO_DATE("13-10-2004","%d-%m-%Y")'
+        -m 1 \
+        --hive-import \
+        --hive-database 'dsacademy' \
+        ‐‐hive‐table 'customer_update_stage' \
+        ‐‐hive‐overwrite ‐‐delete‐target‐dir
