@@ -6,8 +6,8 @@ Será feito o tratamento de Slow Changing Dimensions (SCD) para a tabela custome
     - customer_update_stage
     
       create external table customer_update_stage
-      (customerID int, territoryID int, accountNumber varchar(10), customerType  varchar(1),  rowguid varchar(16), modifiedDate timestamp)
-      row format delimited fields terminated by ',' stored as textfile
+      (customerID int, territoryID int, AccountNumber varchar(10), CustomerType  varchar(1),  rowguid varchar(16), ModifiedDate timestamp)
+      row format delimited fields terminated by ',' lines terminated by '\n' stored as textfile
       location '/user/hadoop/tmp/customer_update_stage';
    
     - customer
@@ -35,4 +35,5 @@ Será feito o tratamento de Slow Changing Dimensions (SCD) para a tabela custome
         ‐‐delete‐target‐dir \
         --target-dir '/user/hadoop/tmp/customer_update_stage' \
         --map-column-hive rowguid=binary,ModifiedDate=BIGINT \
-        –-fields-terminated-by ‘,’
+        –-fields-terminated-by ','
+        --lines-terminated-by '\n'
