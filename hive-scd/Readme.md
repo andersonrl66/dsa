@@ -7,8 +7,8 @@ Será feito o tratamento de Slow Changing Dimensions (SCD) para a tabela custome
     
       create external table customer_update_stage
       (customerID int, territoryID int, accountNumber varchar(10), customerType  varchar(1),  rowguid varchar(16), modifiedDate timestamp)
-      clustered by (customerID) into 2 buckets stored as orc
-      tblproperties("transactional"="true");
+      row format delimited fields terminated by ',' stored as textfile
+      location '/user/hadoop/tmp/customer_update_stage';
    
     - customer
 
@@ -32,5 +32,7 @@ Será feito o tratamento de Slow Changing Dimensions (SCD) para a tabela custome
         --hive-import \
         --hive-database 'dsacademy' \
         ‐‐hive‐table 'customer_update_stage' \
-        ‐‐hive‐overwrite ‐‐delete‐target‐dir \
-        --map-column-hive rowguid=binary,ModifiedDate=BIGINT
+        ‐‐delete‐target‐dir \
+        --target-dir '/user/hadoop/tmp/customer_update_stage' \
+        --map-column-hive rowguid=binary,ModifiedDate=BIGINT \
+        –-fields-terminated-by ‘,’
