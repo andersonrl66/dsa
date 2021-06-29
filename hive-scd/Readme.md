@@ -9,7 +9,7 @@ Será feito o tratamento de Slow Changing Dimensions (SCD) para a tabela custome
     row format delimited fields terminated by ',' lines terminated by '\n' stored as textfile
     location '/user/hadoop/tmp/customer_update_stage';
     
-   2. Criação de tabela customer
+  2. Criação de tabela customer
 
      create table customer
      (customerID int, territoryID int, accountNumber varchar(10), customerType  varchar(1),  
@@ -17,26 +17,19 @@ Será feito o tratamento de Slow Changing Dimensions (SCD) para a tabela custome
      clustered by (customerID) into 2 buckets stored as orc
      tblproperties("transactional"="true");
 
-  2. Script de carga do sqoop
+  3. Script de carga do sqoop
 
-    - Listagem de databases
-    
-        sqoop list-databases --connect jdbc:mysql://hdpmaster:3306/?serverTimezone=UTC --username root -P
-    
-    - Importação de dados do mysql para o hive
-
-
-        sqoop import --connect jdbc:mysql://hdpmaster:3306/adventureworks?serverTimezone=UTC --username root -P \
-        --table 'customer' \
-        --where 'modifiedDate > STR_TO_DATE("13-10-2004","%d-%m-%Y")'
-        -m 1 \
-        ‐‐delete‐target‐dir \
-        --target-dir '/user/hadoop/tmp/customer_update_stage' \
-        --as-textfile \
-        --fields-terminated-by ',' \
-        --lines-terminated-by '\n'
+    sqoop import --connect jdbc:mysql://hdpmaster:3306/adventureworks?serverTimezone=UTC --username root -P \
+    --table 'customer' \
+    --where 'modifiedDate > STR_TO_DATE("13-10-2004","%d-%m-%Y")'
+    -m 1 \
+    ‐‐delete‐target‐dir \
+    --target-dir '/user/hadoop/tmp/customer_update_stage' \
+    --as-textfile \
+    --fields-terminated-by ',' \
+    --lines-terminated-by '\n'
         
-  3. Merge de customer_update_stage em customer no hive. A cláusula using vai gerar dois registros para cada linha a ser atualizada: um será um insert (null join key) e outro um update da coluna valid_to (join key válida).
+  4. Merge de customer_update_stage em customer no hive. A cláusula using vai gerar dois registros para cada linha a ser atualizada: um será um insert (null join key) e outro um update da coluna valid_to (join key válida).
 
     merge into customer
     using
