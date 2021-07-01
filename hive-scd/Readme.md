@@ -11,11 +11,11 @@ Será feito o tratamento de Slow Changing Dimensions (SCD) para a tabela custome
     
   2. Criação de tabela customer
 
-     create table customer
-     (customerID int, territoryID int, accountNumber varchar(10), customerType  varchar(1),  
-     rowguid varchar(16), modifiedDate timestamp, validFrom timestamp, validTo timestamp)
-     clustered by (customerID) into 2 buckets stored as orc
-     tblproperties("transactional"="true");
+    create table customer
+    (customerID int, territoryID int, accountNumber varchar(10), customerType  varchar(1),  
+    rowguid varchar(16), modifiedDate timestamp, validFrom timestamp, validTo timestamp)
+    clustered by (customerID) into 2 buckets stored as orc
+    tblproperties("transactional"="true");
 
   3. Script de carga do sqoop
 
@@ -43,7 +43,7 @@ Será feito o tratamento de Slow Changing Dimensions (SCD) para a tabela custome
     null, customer_update_stage.*
     from
     customer_update_stage join customer
-    on customer_update_stage.id = customer.id
+    on customer_update_stage.customerid = customer.customerid
     where
     (
     customer_update_stage.territoryid <> customer.territoryid
@@ -52,7 +52,7 @@ Será feito o tratamento de Slow Changing Dimensions (SCD) para a tabela custome
     or customer_update_stage.rowguid <> customer.rowguid
     or customer_update_stage.modifieddate <> customer.modifieddate
     )
-    and contacts_target.valid_to is null
+    and customer.validto is null
     ) sub
     on sub.join_key = customer.customerid
     
@@ -62,7 +62,7 @@ Será feito o tratamento de Slow Changing Dimensions (SCD) para a tabela custome
     or sub.customertype  <> customer.customertype
     or sub.rowguid <> customer.rowguid
     or sub.modifieddate <> customer.modifieddate
-    then update set valid_to = current_date()
+    then update set validto = current_date()
 
     when not matched
     then insert
