@@ -21,9 +21,9 @@ Será feito o tratamento de Slow Changing Dimensions (SCD) para a tabela custome
 
     sqoop import --connect jdbc:mysql://hdpmaster:3306/adventureworks?serverTimezone=UTC --username root -P \
     --table 'customer' \
-    --where 'modifiedDate > STR_TO_DATE("13-10-2004","%d-%m-%Y")'
+    --where 'modifiedDate >= STR_TO_DATE("14-10-2004","%d-%m-%Y")' \
     -m 1 \
-    ‐‐delete‐target‐dir \
+    --delete-target-dir \
     --target-dir '/user/hadoop/tmp/customer_update_stage' \
     --as-textfile \
     --fields-terminated-by ',' \
