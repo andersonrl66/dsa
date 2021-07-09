@@ -20,6 +20,8 @@ Implementção de ingestão e tratamento de web server logs utilizando Apache Fl
 4. Execução dos agentes flume
 
    nohup flume-ng agent --name server --conf-file /home/hadoop/projetos/dsa/logs-spark/flume/server.properties &
+   
    nohup flume-ng agent --name client1 --conf-file /home/hadoop/projetos/dsa/logs-spark/flume/client1.properties &
+   
    nohup flume-ng agent --name client2 --conf-file /home/hadoop/projetos/dsa/logs-spark/flume/client2.properties &
    
