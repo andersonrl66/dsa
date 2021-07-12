@@ -10925,3 +10925,167 @@ SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
 2021-07-09 17:11:33,997 INFO hdfs.HDFSEventSink: Writer callback called.
 2021-07-09 17:11:33,997 INFO hdfs.BucketWriter: Closing /user/hadoop/logs-spark/nasa_.1625861446803.log.tmp
 2021-07-09 17:11:34,017 INFO hdfs.BucketWriter: Renaming /user/hadoop/logs-spark/nasa_.1625861446803.log.tmp to /user/hadoop/logs-spark/nasa_.1625861446803.log
+2021-07-09 17:23:50,545 INFO node.Application: Shutting down configuration: { sourceRunners:{src1=EventDrivenSourceRunner: { source:Spool Directory source src1: { spoolDir: /home/hadoop/projetos/dsa/logs-spark/dados-entrada/client1 } }} sinkRunners:{snk1=SinkRunner: { policy:org.apache.flume.sink.DefaultSinkProcessor@49a73889 counterGroup:{ name:null counters:{runner.backoffs.consecutive=100, runner.backoffs=100} } }} channels:{chnl1=org.apache.flume.channel.MemoryChannel{name: chnl1}} }
+2021-07-09 17:23:50,545 INFO node.Application: Stopping Source src1
+2021-07-09 17:23:50,545 INFO lifecycle.LifecycleSupervisor: Stopping component: EventDrivenSourceRunner: { source:Spool Directory source src1: { spoolDir: /home/hadoop/projetos/dsa/logs-spark/dados-entrada/client1 } }
+2021-07-09 17:23:50,546 INFO node.Application: Shutting down configuration: { sourceRunners:{src1=EventDrivenSourceRunner: { source:Avro source src1: { bindAddress: 0.0.0.0, port: 4545 } }} sinkRunners:{snk1=SinkRunner: { policy:org.apache.flume.sink.DefaultSinkProcessor@32008b72 counterGroup:{ name:null counters:{runner.backoffs.consecutive=156, runner.backoffs=167} } }} channels:{chnl1=FileChannel chnl1 { dataDirs: [/home/hadoop/projetos/dsa/logs-spark/flume/file-channel/dataDir] }} }
+2021-07-09 17:23:50,546 INFO node.Application: Stopping Source src1
+2021-07-09 17:23:50,546 INFO lifecycle.LifecycleSupervisor: Stopping component: EventDrivenSourceRunner: { source:Avro source src1: { bindAddress: 0.0.0.0, port: 4545 } }
+2021-07-09 17:23:50,546 INFO source.AvroSource: Avro source src1 stopping: Avro source src1: { bindAddress: 0.0.0.0, port: 4545 }
+2021-07-09 17:23:50,549 INFO ipc.NettyServer: [id: 0x3eca7358, /127.0.0.1:45556 :> /127.0.0.1:4545] DISCONNECTED
+2021-07-09 17:23:50,549 INFO ipc.NettyServer: [id: 0x3eca7358, /127.0.0.1:45556 :> /127.0.0.1:4545] UNBOUND
+2021-07-09 17:23:50,549 INFO ipc.NettyServer: [id: 0x3eca7358, /127.0.0.1:45556 :> /127.0.0.1:4545] CLOSED
+2021-07-09 17:23:50,550 INFO ipc.NettyServer: Connection to /127.0.0.1:45556 disconnected.
+2021-07-09 17:23:50,550 INFO node.Application: Shutting down configuration: { sourceRunners:{src2=EventDrivenSourceRunner: { source:Spool Directory source src2: { spoolDir: /home/hadoop/projetos/dsa/logs-spark/dados-entrada/client2 } }} sinkRunners:{snk2=SinkRunner: { policy:org.apache.flume.sink.DefaultSinkProcessor@49a73889 counterGroup:{ name:null counters:{runner.backoffs.consecutive=98, runner.backoffs=98} } }} channels:{chnl2=org.apache.flume.channel.MemoryChannel{name: chnl2}} }
+2021-07-09 17:23:50,550 INFO node.Application: Stopping Source src2
+2021-07-09 17:23:50,550 INFO lifecycle.LifecycleSupervisor: Stopping component: EventDrivenSourceRunner: { source:Spool Directory source src2: { spoolDir: /home/hadoop/projetos/dsa/logs-spark/dados-entrada/client2 } }
+2021-07-09 17:23:50,580 INFO instrumentation.MonitoredCounterGroup: Component type: SOURCE, name: src1 stopped
+2021-07-09 17:23:50,580 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. source.start.time == 1625861440609
+2021-07-09 17:23:50,580 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. source.stop.time == 1625862230580
+2021-07-09 17:23:50,580 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. src.append-batch.accepted == 1
+2021-07-09 17:23:50,580 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. src.append-batch.received == 1
+2021-07-09 17:23:50,580 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. src.append.accepted == 0
+2021-07-09 17:23:50,580 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. src.append.received == 0
+2021-07-09 17:23:50,580 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. src.channel.write.fail == 0
+2021-07-09 17:23:50,580 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. src.event.read.fail == 0
+2021-07-09 17:23:50,580 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. src.events.accepted == 49
+2021-07-09 17:23:50,580 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. src.events.received == 49
+2021-07-09 17:23:50,580 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. src.generic.processing.fail == 0
+2021-07-09 17:23:50,580 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. src.open-connection.count == 0
+2021-07-09 17:23:50,580 INFO source.SpoolDirectorySource: SpoolDir source src1 stopped. Metrics: SOURCE:src1{src.events.accepted=49, src.open-connection.count=0, src.append.received=0, src.channel.write.fail=0, src.append-batch.received=1, src.generic.processing.fail=0, src.append-batch.accepted=1, src.append.accepted=0, src.events.received=49, src.event.read.fail=0}
+2021-07-09 17:23:50,580 INFO node.Application: Stopping Sink snk1
+2021-07-09 17:23:50,581 INFO lifecycle.LifecycleSupervisor: Stopping component: SinkRunner: { policy:org.apache.flume.sink.DefaultSinkProcessor@49a73889 counterGroup:{ name:null counters:{runner.backoffs.consecutive=100, runner.backoffs=100} } }
+2021-07-09 17:23:50,581 INFO instrumentation.MonitoredCounterGroup: Component type: SOURCE, name: src2 stopped
+2021-07-09 17:23:50,582 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src2. source.start.time == 1625861455622
+2021-07-09 17:23:50,582 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src2. source.stop.time == 1625862230581
+2021-07-09 17:23:50,582 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src2. src.append-batch.accepted == 1
+2021-07-09 17:23:50,582 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src2. src.append-batch.received == 1
+2021-07-09 17:23:50,582 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src2. src.append.accepted == 0
+2021-07-09 17:23:50,582 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src2. src.append.received == 0
+2021-07-09 17:23:50,582 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src2. src.channel.write.fail == 0
+2021-07-09 17:23:50,582 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src2. src.event.read.fail == 0
+2021-07-09 17:23:50,582 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src2. src.events.accepted == 50
+2021-07-09 17:23:50,582 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src2. src.events.received == 50
+2021-07-09 17:23:50,582 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src2. src.generic.processing.fail == 0
+2021-07-09 17:23:50,582 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src2. src.open-connection.count == 0
+2021-07-09 17:23:50,582 INFO source.SpoolDirectorySource: SpoolDir source src2 stopped. Metrics: SOURCE:src2{src.events.accepted=50, src.open-connection.count=0, src.append.received=0, src.channel.write.fail=0, src.append-batch.received=1, src.generic.processing.fail=0, src.append-batch.accepted=1, src.append.accepted=0, src.events.received=50, src.event.read.fail=0}
+2021-07-09 17:23:50,582 INFO node.Application: Stopping Sink snk2
+2021-07-09 17:23:50,582 INFO lifecycle.LifecycleSupervisor: Stopping component: SinkRunner: { policy:org.apache.flume.sink.DefaultSinkProcessor@49a73889 counterGroup:{ name:null counters:{runner.backoffs.consecutive=98, runner.backoffs=98} } }
+2021-07-09 17:23:50,592 INFO sink.AbstractRpcSink: Rpc sink snk2 stopping...
+2021-07-09 17:23:50,592 INFO sink.AbstractRpcSink: Rpc sink snk1 stopping...
+2021-07-09 17:23:50,597 INFO instrumentation.MonitoredCounterGroup: Component type: SINK, name: snk2 stopped
+2021-07-09 17:23:50,597 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk2. sink.start.time == 1625861455594
+2021-07-09 17:23:50,597 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk2. sink.stop.time == 1625862230597
+2021-07-09 17:23:50,597 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk2. sink.batch.complete == 0
+2021-07-09 17:23:50,598 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk2. sink.batch.empty == 98
+2021-07-09 17:23:50,598 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk2. sink.batch.underflow == 1
+2021-07-09 17:23:50,598 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk2. sink.channel.read.fail == 0
+2021-07-09 17:23:50,598 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk2. sink.connection.closed.count == 1
+2021-07-09 17:23:50,598 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk2. sink.connection.creation.count == 1
+2021-07-09 17:23:50,598 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk2. sink.connection.failed.count == 0
+2021-07-09 17:23:50,598 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk2. sink.event.drain.attempt == 50
+2021-07-09 17:23:50,598 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk2. sink.event.drain.sucess == 50
+2021-07-09 17:23:50,598 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk2. sink.event.write.fail == 0
+2021-07-09 17:23:50,598 INFO sink.AbstractRpcSink: Rpc sink snk2 stopped. Metrics: SINK:snk2{sink.batch.underflow=1, sink.event.write.fail=0, sink.connection.failed.count=0, sink.channel.read.fail=0, sink.connection.closed.count=1, sink.event.drain.attempt=50, sink.batch.complete=0, sink.event.drain.sucess=50, sink.connection.creation.count=1, sink.batch.empty=98}
+2021-07-09 17:23:50,598 INFO node.Application: Stopping Channel chnl2
+2021-07-09 17:23:50,598 INFO lifecycle.LifecycleSupervisor: Stopping component: org.apache.flume.channel.MemoryChannel{name: chnl2}
+2021-07-09 17:23:50,598 INFO instrumentation.MonitoredCounterGroup: Component type: CHANNEL, name: chnl2 stopped
+2021-07-09 17:23:50,598 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl2. channel.start.time == 1625861455213
+2021-07-09 17:23:50,598 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl2. channel.stop.time == 1625862230598
+2021-07-09 17:23:50,598 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl2. channel.capacity == 10000
+2021-07-09 17:23:50,598 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl2. channel.current.size == 0
+2021-07-09 17:23:50,598 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl2. channel.event.put.attempt == 50
+2021-07-09 17:23:50,598 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl2. channel.event.put.success == 50
+2021-07-09 17:23:50,598 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl2. channel.event.take.attempt == 149
+2021-07-09 17:23:50,598 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl2. channel.event.take.success == 50
+2021-07-09 17:23:50,598 INFO lifecycle.LifecycleSupervisor: Stopping lifecycle supervisor 10
+2021-07-09 17:23:50,600 INFO instrumentation.MonitoredCounterGroup: Component type: SINK, name: snk1 stopped
+2021-07-09 17:23:50,600 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.start.time == 1625861440545
+2021-07-09 17:23:50,601 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.stop.time == 1625862230600
+2021-07-09 17:23:50,601 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.batch.complete == 0
+2021-07-09 17:23:50,601 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.batch.empty == 100
+2021-07-09 17:23:50,601 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.batch.underflow == 1
+2021-07-09 17:23:50,601 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.channel.read.fail == 0
+2021-07-09 17:23:50,601 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.connection.closed.count == 1
+2021-07-09 17:23:50,601 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.connection.creation.count == 1
+2021-07-09 17:23:50,601 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.connection.failed.count == 0
+2021-07-09 17:23:50,601 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.event.drain.attempt == 49
+2021-07-09 17:23:50,601 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.event.drain.sucess == 49
+2021-07-09 17:23:50,601 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.event.write.fail == 0
+2021-07-09 17:23:50,601 INFO sink.AbstractRpcSink: Rpc sink snk1 stopped. Metrics: SINK:snk1{sink.batch.underflow=1, sink.event.write.fail=0, sink.connection.failed.count=0, sink.channel.read.fail=0, sink.connection.closed.count=1, sink.event.drain.attempt=49, sink.batch.complete=0, sink.event.drain.sucess=49, sink.connection.creation.count=1, sink.batch.empty=100}
+2021-07-09 17:23:50,601 INFO node.Application: Stopping Channel chnl1
+2021-07-09 17:23:50,601 INFO lifecycle.LifecycleSupervisor: Stopping component: org.apache.flume.channel.MemoryChannel{name: chnl1}
+2021-07-09 17:23:50,601 INFO instrumentation.MonitoredCounterGroup: Component type: CHANNEL, name: chnl1 stopped
+2021-07-09 17:23:50,601 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl1. channel.start.time == 1625861440156
+2021-07-09 17:23:50,601 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl1. channel.stop.time == 1625862230601
+2021-07-09 17:23:50,601 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl1. channel.capacity == 10000
+2021-07-09 17:23:50,601 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl1. channel.current.size == 0
+2021-07-09 17:23:50,601 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl1. channel.event.put.attempt == 49
+2021-07-09 17:23:50,601 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl1. channel.event.put.success == 49
+2021-07-09 17:23:50,601 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl1. channel.event.take.attempt == 150
+2021-07-09 17:23:50,601 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl1. channel.event.take.success == 49
+2021-07-09 17:23:50,601 INFO lifecycle.LifecycleSupervisor: Stopping lifecycle supervisor 10
+2021-07-09 17:23:50,625 INFO node.PollingPropertiesFileConfigurationProvider: Configuration provider stopping
+2021-07-09 17:23:50,626 INFO node.PollingPropertiesFileConfigurationProvider: Configuration provider stopping
+2021-07-09 17:23:50,666 INFO ipc.NettyServer: [id: 0x0055cc42, /127.0.0.1:45562 :> /127.0.0.1:4545] DISCONNECTED
+2021-07-09 17:23:50,666 INFO ipc.NettyServer: [id: 0x0055cc42, /127.0.0.1:45562 :> /127.0.0.1:4545] UNBOUND
+2021-07-09 17:23:50,666 INFO ipc.NettyServer: [id: 0x0055cc42, /127.0.0.1:45562 :> /127.0.0.1:4545] CLOSED
+2021-07-09 17:23:50,666 INFO ipc.NettyServer: Connection to /127.0.0.1:45562 disconnected.
+2021-07-09 17:23:50,670 INFO instrumentation.MonitoredCounterGroup: Component type: SOURCE, name: src1 stopped
+2021-07-09 17:23:50,670 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. source.start.time == 1625861426842
+2021-07-09 17:23:50,670 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. source.stop.time == 1625862230670
+2021-07-09 17:23:50,670 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. src.append-batch.accepted == 2
+2021-07-09 17:23:50,670 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. src.append-batch.received == 2
+2021-07-09 17:23:50,670 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. src.append.accepted == 0
+2021-07-09 17:23:50,670 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. src.append.received == 0
+2021-07-09 17:23:50,670 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. src.channel.write.fail == 0
+2021-07-09 17:23:50,670 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. src.event.read.fail == 0
+2021-07-09 17:23:50,670 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. src.events.accepted == 99
+2021-07-09 17:23:50,670 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. src.events.received == 99
+2021-07-09 17:23:50,670 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. src.generic.processing.fail == 0
+2021-07-09 17:23:50,670 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SOURCE, name: src1. src.open-connection.count == 2
+2021-07-09 17:23:50,670 INFO source.AvroSource: Avro source src1 stopped. Metrics: SOURCE:src1{src.events.accepted=99, src.open-connection.count=2, src.append.received=0, src.channel.write.fail=0, src.append-batch.received=2, src.generic.processing.fail=0, src.append-batch.accepted=2, src.append.accepted=0, src.events.received=99, src.event.read.fail=0}
+2021-07-09 17:23:50,670 INFO node.Application: Stopping Sink snk1
+2021-07-09 17:23:50,670 INFO lifecycle.LifecycleSupervisor: Stopping component: SinkRunner: { policy:org.apache.flume.sink.DefaultSinkProcessor@32008b72 counterGroup:{ name:null counters:{runner.backoffs.consecutive=156, runner.backoffs=167} } }
+2021-07-09 17:23:50,672 INFO instrumentation.MonitoredCounterGroup: Component type: SINK, name: snk1 stopped
+2021-07-09 17:23:50,672 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.start.time == 1625861426646
+2021-07-09 17:23:50,672 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.stop.time == 1625862230672
+2021-07-09 17:23:50,672 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.batch.complete == 2
+2021-07-09 17:23:50,672 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.batch.empty == 167
+2021-07-09 17:23:50,672 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.batch.underflow == 1
+2021-07-09 17:23:50,672 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.channel.read.fail == 0
+2021-07-09 17:23:50,672 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.connection.closed.count == 3
+2021-07-09 17:23:50,673 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.connection.creation.count == 3
+2021-07-09 17:23:50,673 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.connection.failed.count == 0
+2021-07-09 17:23:50,673 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.event.drain.attempt == 99
+2021-07-09 17:23:50,673 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.event.drain.sucess == 99
+2021-07-09 17:23:50,673 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: snk1. sink.event.write.fail == 0
+2021-07-09 17:23:50,673 INFO node.Application: Stopping Channel chnl1
+2021-07-09 17:23:50,673 INFO lifecycle.LifecycleSupervisor: Stopping component: FileChannel chnl1 { dataDirs: [/home/hadoop/projetos/dsa/logs-spark/flume/file-channel/dataDir] }
+2021-07-09 17:23:50,673 INFO file.FileChannel: Stopping FileChannel chnl1 { dataDirs: [/home/hadoop/projetos/dsa/logs-spark/flume/file-channel/dataDir] }...
+2021-07-09 17:23:50,673 INFO file.EventQueueBackingStoreFile: Start checkpoint for /home/hadoop/projetos/dsa/logs-spark/flume/file-channel/checkpointDir/checkpoint, elements to sync = 0
+2021-07-09 17:23:50,701 INFO file.EventQueueBackingStoreFile: Updating checkpoint metadata: logWriteOrderID: 1625861426462, queueSize: 0, queueHead: 389
+2021-07-09 17:23:50,712 INFO file.Log: Updated checkpoint for file: /home/hadoop/projetos/dsa/logs-spark/flume/file-channel/dataDir/log-12 position: 18552 logWriteOrderID: 1625861426462
+2021-07-09 17:23:50,712 INFO file.LogFile: Closing RandomReader /home/hadoop/projetos/dsa/logs-spark/flume/file-channel/dataDir/log-9
+Attempting to shutdown background worker.
+2021-07-09 17:23:50,731 INFO file.Log: Attempting to shutdown background worker.
+2021-07-09 17:23:50,732 INFO file.LogFile: Closing /home/hadoop/projetos/dsa/logs-spark/flume/file-channel/dataDir/log-12
+2021-07-09 17:23:50,732 INFO file.LogFile: Closing RandomReader /home/hadoop/projetos/dsa/logs-spark/flume/file-channel/dataDir/log-9
+2021-07-09 17:23:50,748 INFO file.LogFile: Closing RandomReader /home/hadoop/projetos/dsa/logs-spark/flume/file-channel/dataDir/log-10
+2021-07-09 17:23:50,762 INFO file.LogFile: Closing RandomReader /home/hadoop/projetos/dsa/logs-spark/flume/file-channel/dataDir/log-11
+2021-07-09 17:23:50,768 INFO file.LogFile: Closing RandomReader /home/hadoop/projetos/dsa/logs-spark/flume/file-channel/dataDir/log-12
+2021-07-09 17:23:50,788 INFO instrumentation.MonitoredCounterGroup: Component type: CHANNEL, name: chnl1 stopped
+2021-07-09 17:23:50,788 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl1. channel.start.time == 1625861426213
+2021-07-09 17:23:50,788 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl1. channel.stop.time == 1625862230788
+2021-07-09 17:23:50,788 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl1. channel.capacity == 1000000
+2021-07-09 17:23:50,788 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl1. channel.current.size == 0
+2021-07-09 17:23:50,788 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl1. channel.event.put.attempt == 99
+2021-07-09 17:23:50,788 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl1. channel.event.put.success == 99
+2021-07-09 17:23:50,788 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl1. channel.event.take.attempt == 267
+2021-07-09 17:23:50,788 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl1. channel.event.take.success == 99
+2021-07-09 17:23:50,788 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl1. channel.file.checkpoint.backup.write.error == 0
+2021-07-09 17:23:50,788 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl1. channel.file.checkpoint.write.error == 0
+2021-07-09 17:23:50,788 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl1. channel.file.event.put.error == 0
+2021-07-09 17:23:50,788 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: chnl1. channel.file.event.take.error == 0
+2021-07-09 17:23:50,788 INFO lifecycle.LifecycleSupervisor: Stopping lifecycle supervisor 10
+2021-07-09 17:23:50,789 INFO node.PollingPropertiesFileConfigurationProvider: Configuration provider stopping
