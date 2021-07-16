@@ -33,3 +33,16 @@ nohup flume-ng agent --name client2 --conf-file /home/hadoop/projetos/dsa/logs-s
 5. Criação de base de tabela no hive com os dados dos logs
 ```
 hive -f /home/hadoop/projetos/dsa/logs-spark/hive/criacaoTabelaLogs.hql
+```
+
+6. Geração de pacote de processador (spark) dos logs 
+```
+cd /home/hadoop/projetos/dsa/logs-spark/spark
+sbt package
+```
+7. Execução de processamento de logs e gravação no hive
+8. ```
+9. bin/spark-submit \
+  --class "SimpleApp" \
+  --master local[1] \
+  target/scala-2.12/simple-project_2.12-1.0.jar
