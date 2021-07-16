@@ -1,3 +1,4 @@
 **/file-channel
-nohup.out
+**/file-channel/checkpointDir
 **/target
+nohup.out
