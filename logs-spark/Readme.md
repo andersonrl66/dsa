@@ -41,8 +41,11 @@ cd /home/hadoop/projetos/dsa/logs-spark/spark
 sbt package
 ```
 7. Execução de processamento de logs e gravação no hive
-8. ```
-9. bin/spark-submit \
-  --class "SimpleApp" \
-  --master local[1] \
-  target/scala-2.12/simple-project_2.12-1.0.jar
+```
+spark-submit \
+--class "LogProcessor" \
+--master local[*] \
+/home/hadoop/projetos/dsa/logs-spark/spark/target/scala-2.12/processador-de-logs-web_2.12-1.0.jar \
+/user/hadoop/dsa/logs-spark/flume \
+/user/hadoop/dsa/logs-spark/hive/nasa_processed_logs
+```
