@@ -46,6 +46,6 @@ spark-submit \
 --class "LogProcessor" \
 --master local[*] \
 /home/hadoop/projetos/dsa/logs-spark/spark/target/scala-2.12/processador-de-logs-web_2.12-1.0.jar \
-/user/hadoop/dsa/logs-spark/flume \
-/user/hadoop/dsa/logs-spark/hive/nasa_processed_logs
+/user/hadoop/logs-spark/flume \
+/user/hadoop/logs-spark/hive/nasa_processed_logs
 ```
