@@ -28,6 +28,13 @@ object LogProcessor  {
 		val inputPath = args(0)
 		val outputPath = args(1)
 
+		// somente no spark shell
+		spark-shell --conf "spark.serializer=org.apache.spark.serializer.KryoSerializer"
+		val inputPath = "/user/hadoop/logs-spark/flume"
+		val outputPath = "/user/hadoop/logs-spark/hive/nasa_processed_logs"
+		import org.apache.spark.sql.Encoder
+        implicit val generalRowEncoder: Encoder[Log] = org.apache.spark.sql.Encoders.kryo[Log]
+
 		val conf = new SparkConf().setAppName("NasaLogProcessor")
 		conf.set("spark.serializer","org.apache.spark.serializer.KryoSerializer")
 		conf.registerKryoClasses(Array(classOf[Log]))
@@ -39,13 +46,13 @@ object LogProcessor  {
 			.getOrCreate();
 
 		val logInputRdd = spark.sparkContext.textFile(inputPath)
-		val LGREGEXP = "(.+?)\\s(.+?)\\s(.+?)\\s\\[(.+?)\\s(.+?)\\]\\s\"(.+?)\\s(.+?)\\s(.+?)\"\\s(.+?)\\s(.+?)".r
+		val LGREGEXP = "(.+?)\\s(\\d{4}\\-\\d{2}\\-\\d{2}T\\d{2}:\\d{2}:\\d{2})([\\+|\\-]\\d{2}:\\d{2})\\s\"(.+?)\\s(.+?)\\s(.+?)\"\\s(.+?)\\s(.+?)".r
 
 		val badRecords = spark.sparkContext.longAccumulator("Bad Log Line Count")
 
 		val logRDD = logInputRdd.mapPartitions(iters => {
 			val cal  = Calendar.getInstance
-			val sdf = new SimpleDateFormat("dd/MMM/yyyy:hh:mm:ss")
+			val sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
 
 			val ZERO = (0).toShort
 			
@@ -66,7 +73,6 @@ object LogProcessor  {
 			}).filter (l => {
 				//put an accumulator
 				badRecords.add(1)
-				
 				l.host != ""
 			}) //removing bad records
 		})
