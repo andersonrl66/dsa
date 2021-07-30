@@ -21,7 +21,7 @@ object LogProcessor  {
 
 	def main(args : Array[String]) : Unit = {
 		if (args.length != 2){
-			println("No arguments!!! Use <inputPath> <outputFolderPath>")
+			println("Sem argumentos!!! Use <inputPath> <outputFolderPath>")
 			return; 
 		}
 
@@ -29,11 +29,11 @@ object LogProcessor  {
 		val outputPath = args(1)
 
 		// somente no spark shell
-		spark-shell --conf "spark.serializer=org.apache.spark.serializer.KryoSerializer"
-		val inputPath = "/user/hadoop/logs-spark/flume"
-		val outputPath = "/user/hadoop/logs-spark/hive/nasa_processed_logs"
-		import org.apache.spark.sql.Encoder
-        implicit val generalRowEncoder: Encoder[Log] = org.apache.spark.sql.Encoders.kryo[Log]
+		//spark-shell --conf "spark.serializer=org.apache.spark.serializer.KryoSerializer"
+		//val inputPath = "/user/hadoop/logs-spark/flume"
+		//val outputPath = "/user/hadoop/logs-spark/hive/nasa_processed_logs"
+		//import org.apache.spark.sql.Encoder
+        //implicit val generalRowEncoder: Encoder[Log] = org.apache.spark.sql.Encoders.kryo[Log]
 
 		val conf = new SparkConf().setAppName("NasaLogProcessor")
 		conf.set("spark.serializer","org.apache.spark.serializer.KryoSerializer")
@@ -46,7 +46,7 @@ object LogProcessor  {
 			.getOrCreate();
 
 		val logInputRdd = spark.sparkContext.textFile(inputPath)
-		val LGREGEXP = "(.+?)\\s(\\d{4}\\-\\d{2}\\-\\d{2}T\\d{2}:\\d{2}:\\d{2})([\\+|\\-]\\d{2}:\\d{2})\\s\"(.+?)\\s(.+?)\\s(.+?)\"\\s(.+?)\\s(.+?)".r
+		val LGREGEXP = "^(.+?)\\s(\\d{4}\\-\\d{2}\\-\\d{2}T\\d{2}:\\d{2}:\\d{2})([\\+|\\-]\\d{2}:\\d{2})\\s\"(.+?)\\s(.+?)\\s(.+?)\"\\s(.+?)\\s(.+?)$".r
 
 		val badRecords = spark.sparkContext.longAccumulator("Bad Log Line Count")
 
@@ -57,7 +57,10 @@ object LogProcessor  {
 			val ZERO = (0).toShort
 			
 			iters.map (_ match {
-				case LGREGEXP(host, clientAuthId, userId, ts, tz, method, resource, protocol, responsecode, bytes) => {
+				//case LGREGEXP(host, clientAuthId, userId, ts, tz, method, resource, protocol, responsecode, bytes) => {
+				case LGREGEXP(host, ts, tz, method, resource, protocol, responsecode, bytes) => {
+					    val clientAuthId = ""
+						val userId = ""
 						cal.setTime(sdf.parse(ts))
 						val year = cal.get(Calendar.YEAR).toShort
 						val month = cal.get(Calendar.MONTH).toShort
