@@ -22,4 +22,4 @@ create external table log (
 	ts_dayOfWeek tinyint
 )
 stored as parquet
-location '/user/hadoop/dsa/logs-spark/hive/nasa_processed_logs';
+location '/user/hadoop/logs-spark/hive/nasa_processed_logs';
