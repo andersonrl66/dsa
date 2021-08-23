@@ -2,3 +2,4 @@
 **/file-channel/checkpointDir
 **/target
 nohup.out
+*.log

@@ -1,21 +1,20 @@
 Implementção de ingestão e tratamento de web server logs utilizando Apache Flume, HBase, Spark e Kafka
+
+ Utilizamos os arquivos dados-entrada/dataaug95 e dados-entrada/dataaug95-2 para simular dois servidores web em [Apache CLF - Common Log Format](https://httpd.apache.org/docs/2.4/logs.html). Estes arquivos são subconjuntos de logs de web servers da Nasa (http://ita.ee.lbl.gov/html/contrib/NASA-HTTP.html). Fizemos duas simulações : batch e streamig. Na execução batch os dados são colocados no hive, enquanto no streaming os dados são colocados no hbase.
+
 1. Batch
 
-    1.1 Base de dados de entrada
+    logs --> flume --> spark --> hive
 
-   Utilizamos os arquivos dados-entrada/dataaug95 e dados-entrada/dataaug95-2 para simular dois servidores web em [Apache CLF - Common Log Format](https://httpd.apache.org/docs/2.4/logs.html). Estes arquivos são subconjuntos de logs de web servers da Nasa (http://ita.ee.lbl.gov/html/contrib/NASA-HTTP.html)
-     
-    1.2 Criação de diretórios do flume no servidor
+    1.1 Criação de diretórios do flume no servidor
     ```
-    mkdir -p /home/hadoop/projetos/dsa/logs-spark
-    mkdir -p /home/hadoop/projetos/dsa/dados-entrada
-    mkdir -p /home/hadoop/projetos/dsa/logs-spark/flume
-    mkdir -p /home/hadoop/projetos/dsa/logs-spark/flume/file-channel
+    mkdir -p /home/hadoop/projetos/dsa/logs-spark/dados-entrada/client1
+    mkdir -p /home/hadoop/projetos/dsa/logs-spark/dados-entrada/client2
     mkdir -p /home/hadoop/projetos/dsa/logs-spark/flume/file-channel/checkpointDir
     mkdir -p /home/hadoop/projetos/dsa/logs-spark/flume/file-channel/dataDir
      ```    
          
-    1.3 Configuração de diretórios no HDFS para onde os logs serão levados
+    1.2 Configuração de diretórios no HDFS para onde os logs serão levados
     
     ``` 
     hdfs dfs -mkdir /user/hadoop/logs-spark
@@ -23,7 +22,7 @@ Implementção de ingestão e tratamento de web server logs utilizando Apache Fl
     hdfs dfs -mkdir /user/hadoop/logs-spark/hive
     ``` 
     
-    1.4 Execução dos agentes flume
+    1.3 Execução dos agentes flume
 
     ``` 
     nohup flume-ng agent --name server --conf-file /home/hadoop/projetos/dsa/logs-spark/flume/server.properties &
@@ -31,17 +30,17 @@ Implementção de ingestão e tratamento de web server logs utilizando Apache Fl
     nohup flume-ng agent --name client2 --conf-file /home/hadoop/projetos/dsa/logs-spark/flume/client2.properties &
     ```    
     
-    1.5 Criação de base de tabela no hive com os dados dos logs
+    1.4 Criação de base de tabela no hive com os dados dos logs
     ```
     hive -f /home/hadoop/projetos/dsa/logs-spark/hive/criacaoTabelaLogs.hql
     ```
     
-    1.6 Geração de pacote de processador (spark) dos logs 
+    1.5 Geração de pacote de processador (spark) dos logs 
     ```
     cd /home/hadoop/projetos/dsa/logs-spark/spark
     sbt package
     ```
-    1.7 Execução de processamento de logs e gravação no hive
+    1.6 Execução de processamento de logs e gravação no hive
     ```
     spark-submit \
     --class "LogProcessor" \
@@ -50,3 +49,28 @@ Implementção de ingestão e tratamento de web server logs utilizando Apache Fl
     /user/hadoop/logs-spark/flume \
     /user/hadoop/logs-spark/hive/nasa_processed_logs
     ```
+2. Streaming
+
+    logs --> flume --> kafka --> spark --> hbase
+
+    2.1 Criação de diretórios do flume no servidor
+    ```
+    mkdir -p /home/hadoop/projetos/dsa/logs-spark/dados-entrada/stream/client1
+    mkdir -p /home/hadoop/projetos/dsa/logs-spark/dados-entrada/stream/client2
+    mkdir -p /home/hadoop/projetos/dsa/logs-spark/flume/file-channel/stream/checkpointDir
+    mkdir -p /home/hadoop/projetos/dsa/logs-spark/flume/file-channel/stream/dataDir
+     ```    
+    2.2 Execução dos agentes flume
+    ``` 
+    nohup flume-ng agent --name server --conf-file /home/hadoop/projetos/dsa/logs-spark/flume/stream_server.properties &
+    nohup flume-ng agent --name client1 --conf-file /home/hadoop/projetos/dsa/logs-spark/flume/stream_client1.properties & 
+    nohup flume-ng agent --name client2 --conf-file /home/hadoop/projetos/dsa/logs-spark/flume/stream_client2.properties &
+    ```    
+    2.3 Execução do zookeeper e kafka
+    ```
+    zkServer.sh start
+    nohup /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties > kafka.log &
+    ```
+    2.4 Criação de tópico no kafka
+    ```    
+    kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic logs-dsa
