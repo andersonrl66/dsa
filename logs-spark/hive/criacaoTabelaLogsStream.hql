@@ -1,8 +1,8 @@
-create database log_stream_hive_db;
+create database if not exists logs_spark;
 
-use log_stream_hive_db;
+use logs_spark;
 
-create external table log_stream_hive_tb (
+create external table if not exists log_stream_hive_tb (
 	host string, 
 	clientAuthId string, 
 	userId string, 
@@ -21,7 +21,6 @@ create external table log_stream_hive_tb (
 	ts_sec tinyint,
 	ts_dayOfWeek tinyint
 )
-
 stored by 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
 with serdeproperties ("hbase.columns.mapping" = ":key, log_details_hbase_cf:host, 
                                                        log_details_hbase_cf:clientAuthId, 
