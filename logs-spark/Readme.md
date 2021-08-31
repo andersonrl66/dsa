@@ -80,9 +80,14 @@ Implementção de ingestão e tratamento de web server logs utilizando Apache Fl
     hbase shell
     create_namespace 'nasa_stream_hbase_ns'
     create 'nasa_stream_hbase_ns:log_stream_hbase_tb', 'log_details_hbase_cf'
+    ```
     2.6 Criação do esquema da tabela utilizando o hive
-   ```
+    ```
     hive -f /home/hadoop/projetos/dsa/logs-spark/hive/criacaoTabelaLogsStream.hql
     ```
- 
+    1.5 Geração de pacote de processador (spark) dos logs 
+    ```
+    cd /home/hadoop/projetos/dsa/logs-spark/spark
+    sbt package
+    ```
     

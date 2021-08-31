@@ -3,7 +3,7 @@ create database if not exists logs_spark;
 use logs_spark;
 
 create external table if not exists log_stream_hive_tb (
-	id int,
+	id string,
 	host string, 
 	clientAuthId string, 
 	userId string, 
