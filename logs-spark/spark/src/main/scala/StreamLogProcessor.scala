@@ -14,8 +14,8 @@ import java.nio.file.Paths;
 object StreamLogProcessor  {
 
 	def main(args : Array[String]) : Unit = {
-		if (args.length != 2){
-			println("Sem argumentos!!! Use <inputPath> <outputFolderPath>")
+		if (args.length != 3){
+			println("Sem argumentos!!! Use <kafkaServers> <kafkaTopic> <topicSchema>")
 			return; 
 		}
 
