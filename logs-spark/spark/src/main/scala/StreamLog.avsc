@@ -1,0 +1,9 @@
+{
+  "namespace": "dsa.avro",
+  "type": "record",
+  "name": "StreamLog",
+  "fields": [
+    {"name": "key", "type": "string"},
+    {"name": "value", "type": ["int", "null"]}
+  ]
+}

@@ -6,10 +6,10 @@ import org.apache.spark.sql.avro.functions._
 import org.apache.spark.streaming._
 
 import org.apache.avro.SchemaBuilder
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
-import spark.implicits._
-
-case class Log (host: String, clientAuthId: String, userId: String, method: String, resource: String, protocol:String, responsecode:String, bytes:String, tz: String, ts: String, year: Short, month: Short, day: Short, hour: Short, minute: Short, sec: Short, dayOfWeek: Short)
+//case class StreamLog (host: String, clientAuthId: String, userId: String, method: String, resource: String, protocol:String, responsecode:String, bytes:String, tz: String, ts: String, year: Short, month: Short, day: Short, hour: Short, minute: Short, sec: Short, dayOfWeek: Short)
 
 object StreamLogProcessor  {
 
@@ -26,7 +26,9 @@ object StreamLogProcessor  {
 			          .master("local[*]")
                 .appName("StreamLogProcessor")
 		          	.getOrCreate();
+    import spark.implicits._
 
+    val jsonFormatSchema = new String(Files.readAllBytes(Paths.get("./StreamLog.avsc")))
     val lines = spark
                 .readStream
                 .format("kafka")
@@ -34,7 +36,9 @@ object StreamLogProcessor  {
                 .option("subscribe", kafkaTopic)
                 .load()
                 .select(
-                  from_avro($"value", SchemaBuilder.builder().stringType()).as("log"))
+                      from_avro('value, jsonFormatSchema) as 'value)
+                      //from_avro($"key", SchemaBuilder.builder().stringType()).as("key"),
+                      //from_avro($"value", SchemaBuilder.builder().intType()).as("value"))
                 // from_avro($"host", SchemaBuilder.builder().stringType()).as("host"),
                 // from_avro($"clientAuthId", SchemaBuilder.builder().stringType()).as("clientAuthId"),
                 // from_avro($"userId", SchemaBuilder.builder().stringType()).as("userId"),
@@ -83,11 +87,11 @@ object StreamLogProcessor  {
                         
     //                   }
     //               ).start()
-    val query = wordCounts.writeStream
+    val query = lines.writeStream
                 .outputMode("complete")
                 .format("console")
                 .start() 
-                  
+
     query.awaitTermination()
   }
 }
