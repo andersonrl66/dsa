@@ -21,6 +21,7 @@ object StreamLogProcessor  {
 
 		val kafkaServers = args(0)
 		val kafkaTopic = args(1)
+    val topicSchema = args(2)
 
 		val spark = SparkSession.builder()
 			          .master("local[*]")
@@ -28,7 +29,7 @@ object StreamLogProcessor  {
 		          	.getOrCreate();
     import spark.implicits._
 
-    val jsonFormatSchema = new String(Files.readAllBytes(Paths.get("./StreamLog.avsc")))
+    val jsonFormatSchema = new String(Files.readAllBytes(Paths.get(topicSchema)))
     val lines = spark
                 .readStream
                 .format("kafka")

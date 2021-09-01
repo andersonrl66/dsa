@@ -85,9 +85,18 @@ Implementção de ingestão e tratamento de web server logs utilizando Apache Fl
     ```
     hive -f /home/hadoop/projetos/dsa/logs-spark/hive/criacaoTabelaLogsStream.hql
     ```
-    1.5 Geração de pacote de processador (spark) dos logs 
+    2.7 Geração de pacote de processador (spark) dos logs 
     ```
     cd /home/hadoop/projetos/dsa/logs-spark/spark
     sbt package
     ```
-    
+    2.8 Execução de processamento de logs e gravação no hive
+    ```
+    spark-submit \
+    --class "StreamLogProcessor" \
+    --master local[*] \
+    /home/hadoop/projetos/dsa/logs-spark/spark/target/scala-2.12/processador-de-logs-web_2.12-1.0.jar \
+    hdpmaster:9092 \
+    logs-dsa \
+    /home/hadoop/projetos/dsa/logs-spark/spark/resources/StreamLog.avsc
+    ```
