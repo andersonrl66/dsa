@@ -89,7 +89,7 @@ object StreamLogProcessor  {
     //                   }
     //               ).start()
     val query = lines.writeStream
-                .outputMode("complete")
+                .outputMode("append")
                 .format("console")
                 .start() 
 
