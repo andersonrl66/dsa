@@ -35,6 +35,7 @@ object StreamLogProcessor  {
                 .format("kafka")
                 .option("kafka.bootstrap.servers", kafkaServers)
                 .option("subscribe", kafkaTopic)
+                .option("startingOffsets","earliest")
                 .load()
                 .select(
                       from_avro('value, jsonFormatSchema) as 'value)
