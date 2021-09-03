@@ -37,8 +37,11 @@ object StreamLogProcessor  {
                 .option("subscribe", kafkaTopic)
                 .option("startingOffsets","earliest")
                 .load()
-                .select(
-                      from_avro('value, jsonFormatSchema) as 'value)
+                .selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)")
+                .as[(String, String)]
+                //.select(         
+                      //from_avro("value") as "value")
+                      //from_avro('value, jsonFormatSchema) as 'value)
                       //from_avro($"key", SchemaBuilder.builder().stringType()).as("key"),
                       //from_avro($"value", SchemaBuilder.builder().intType()).as("value"))
                 // from_avro($"host", SchemaBuilder.builder().stringType()).as("host"),
