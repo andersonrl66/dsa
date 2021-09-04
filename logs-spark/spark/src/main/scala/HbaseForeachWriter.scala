@@ -1,3 +1,5 @@
+package logs
+
 import java.util.concurrent.ExecutorService
 
 import org.apache.hadoop.hbase.client.{Connection, ConnectionFactory, Put, Table}
