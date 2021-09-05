@@ -81,7 +81,7 @@ object StreamLogProcessor  {
                 .writeStream
                 .foreach(new HBaseForeachWriter[Row] {
                         override val tableName: String = "nasa_stream_hbase_ns:log_stream_hbase_tb"
-                        override val hbaseConfResources: Seq[String] = Seq("/opt/hadoop/etc/hadoop/core-site.xml", "/opt/hbase/conf/hbase-site.xml") 
+                        override val hbaseConfResources: Seq[String] = Seq("core-site.xml", "hbase-site.xml") 
                     
                         override def toPut(value: Row): Put = {
 
