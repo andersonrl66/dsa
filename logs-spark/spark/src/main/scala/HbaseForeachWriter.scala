@@ -31,9 +31,14 @@ trait HBaseForeachWriter[RECORD] extends ForeachWriter[RECORD] {
   def createConnection(): Connection = {
     val log = LogManager.getRootLogger 
     val hbaseConfig = HBaseConfiguration.create()
-    hbaseConfResources.foreach(hbaseConfig.addResource)
+    //hbaseConfResources.foreach(hbaseConfig.addResource)
+    hbaseConfig.set("hbase.zookeeper.quorum", "hdpmaster,hdpslv1,hdpslv2")
+    hbaseConfig.set("hbase.zookeeper.property.clientPort", "2181")
+    hbaseConfig.set("zookeeper.znode.parent", "/hbase-unsecure")
+    hbaseConfig.set("hbase.cluster.distributed", "true")
     log.warn(hbaseConfig.toString())
-    ConnectionFactory.createConnection(hbaseConfig, pool.orNull, user.orNull)
+    //ConnectionFactory.createConnection(hbaseConfig, pool.orNull, user.orNull)
+    ConnectionFactory.createConnection(hbaseConfig)
   }
 
   def getHTable(connection: Connection): Table = {
