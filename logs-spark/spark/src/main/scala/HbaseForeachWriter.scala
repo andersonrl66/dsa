@@ -7,6 +7,8 @@ import org.apache.hadoop.hbase.security.User
 import org.apache.hadoop.hbase.{HBaseConfiguration, TableName}
 import org.apache.spark.sql.ForeachWriter
 
+import org.apache.log4j.{Level, LogManager, PropertyConfigurator}
+
 trait HBaseForeachWriter[RECORD] extends ForeachWriter[RECORD] {
 
   val tableName: String
@@ -27,8 +29,10 @@ trait HBaseForeachWriter[RECORD] extends ForeachWriter[RECORD] {
   }
 
   def createConnection(): Connection = {
+    val log = LogManager.getRootLogger 
     val hbaseConfig = HBaseConfiguration.create()
     hbaseConfResources.foreach(hbaseConfig.addResource)
+    log.warn(hbaseConfig.toString())
     ConnectionFactory.createConnection(hbaseConfig, pool.orNull, user.orNull)
   }
 
