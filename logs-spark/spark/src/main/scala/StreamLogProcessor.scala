@@ -115,6 +115,7 @@ object StreamLogProcessor  {
                                 p.addColumn(Bytes.toBytes(columnFamilyName),Bytes.toBytes("resource"),Bytes.toBytes(resource))
                                 p.addColumn(Bytes.toBytes(columnFamilyName),Bytes.toBytes("protocol"),Bytes.toBytes(protocol))
                                 p.addColumn(Bytes.toBytes(columnFamilyName),Bytes.toBytes("responsecode"),Bytes.toBytes(responsecode))
+                                p.addColumn(Bytes.toBytes(columnFamilyName),Bytes.toBytes("bytes"),Bytes.toBytes(bytes))
                                 p.addColumn(Bytes.toBytes(columnFamilyName),Bytes.toBytes("tz"),Bytes.toBytes(tz))
                                 p.addColumn(Bytes.toBytes(columnFamilyName),Bytes.toBytes("ts"),Bytes.toBytes(ts))
                                 p.addColumn(Bytes.toBytes(columnFamilyName),Bytes.toBytes("ts_year"),Bytes.toBytes(year))
