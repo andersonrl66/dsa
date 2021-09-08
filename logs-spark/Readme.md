@@ -60,21 +60,22 @@ Implementção de ingestão e tratamento de web server logs utilizando Apache Fl
     mkdir -p /home/hadoop/projetos/dsa/logs-spark/flume/file-channel/stream/checkpointDir
     mkdir -p /home/hadoop/projetos/dsa/logs-spark/flume/file-channel/stream/dataDir
      ```    
-    2.2 Execução dos agentes flume
+    2.2 Execução do zookeeper e kafka
+    ```
+    zkServer.sh start
+    nohup /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties > kafka.log &
+    ```
+    2.3 Criação de tópico no kafka
+    ```    
+    kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic logs-dsa
+    ```
+    2.4 Execução dos agentes flume
     ``` 
     nohup flume-ng agent --name server --conf-file /home/hadoop/projetos/dsa/logs-spark/flume/stream_server.properties &
     nohup flume-ng agent --name client1 --conf-file /home/hadoop/projetos/dsa/logs-spark/flume/stream_client1.properties & 
     nohup flume-ng agent --name client2 --conf-file /home/hadoop/projetos/dsa/logs-spark/flume/stream_client2.properties &
     ```    
-    2.3 Execução do zookeeper e kafka
-    ```
-    zkServer.sh start
-    nohup /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties > kafka.log &
-    ```
-    2.4 Criação de tópico no kafka
-    ```    
-    kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic logs-dsa
-    ```
+    
     2.5 Criação de tabela no hbase shell
     ```
     hbase shell
@@ -99,6 +100,5 @@ Implementção de ingestão e tratamento de web server logs utilizando Apache Fl
 org.apache.hbase:hbase-client:2.4.5,org.apache.hbase:hbase-common:2.4.5\
     /home/hadoop/projetos/dsa/logs-spark/spark/target/scala-2.12/processador-de-logs-web_2.12-1.0.jar \
     hdpmaster:9092 \
-    logs-dsa \
-    /home/hadoop/projetos/dsa/logs-spark/spark/resources/StreamLog.avsc
+    logs-dsa
     ```

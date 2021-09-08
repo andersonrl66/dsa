@@ -15,12 +15,12 @@ create external table if not exists log_stream_hive_tb (
 	tz string, 
 	ts string,
 	ts_year smallint,
-	ts_month tinyint,
-	ts_day tinyint,
-	ts_hour tinyint,
-	ts_minute tinyint,
-	ts_sec tinyint,
-	ts_dayOfWeek tinyint
+	ts_month smallint,
+	ts_day smallint,
+	ts_hour smallint,
+	ts_minute smallint,
+	ts_sec smallint,
+	ts_dayOfWeek smallint
 )
 stored by 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
 with serdeproperties ("hbase.columns.mapping" = ":key, log_details_hbase_cf:host, 
