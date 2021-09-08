@@ -97,7 +97,7 @@ Implementção de ingestão e tratamento de web server logs utilizando Apache Fl
     --class "logs.StreamLogProcessor" \
     --master local[*] \
     --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.1,org.apache.spark:spark-avro_2.12:3.1.1,\
-org.apache.hbase:hbase-client:2.4.5,org.apache.hbase:hbase-common:2.4.5\
+    org.apache.hbase:hbase-client:2.4.5,org.apache.hbase:hbase-common:2.4.5\
     /home/hadoop/projetos/dsa/logs-spark/spark/target/scala-2.12/processador-de-logs-web_2.12-1.0.jar \
     hdpmaster:9092 \
     logs-dsa
